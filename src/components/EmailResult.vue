@@ -1,6 +1,8 @@
 <template>
-  <div v-for="email in emails" :key="email">
-    <h1>{{ email }}</h1>
+  <div class="wrapper">
+    <a v-for="email in emails" :key="email">
+      {{ email }}
+    </a>
   </div>
 </template>
 
@@ -15,6 +17,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
 </style>
