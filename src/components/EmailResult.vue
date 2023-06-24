@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="email-wrap">
     <a v-for="email in emails" :key="email">
       {{ email }}
     </a>
@@ -18,7 +18,7 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
+.email-wrap {
   display: flex;
   flex-direction: column;
 }

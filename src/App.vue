@@ -1,11 +1,13 @@
 <template>
-    <email-result
-        :emails="emails"
-    />
+  <div class="wrapper">
     <email-form
         @clear="clear"
         @addToEmails="addToEmails"
     />
+    <email-result
+        :emails="emails"
+    />
+  </div>
 </template>
 
 <script>
@@ -35,5 +37,18 @@ export default {
 </script>
 
 <style>
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: lightslategrey;
+}
+.wrapper {
 
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+  margin: 0 50px;
+  align-items: center;
+}
 </style>

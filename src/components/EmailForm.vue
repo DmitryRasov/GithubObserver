@@ -43,5 +43,21 @@ export default {
 </script>
 
 <style scoped>
-
+form {
+  margin-bottom: 20p10;
+}
+input {
+  border: 2px solid red;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  outline: none;
+  font-size: 32px;
+}
+button {
+  background-color: transparent;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: 32px;
+  cursor: pointer;
+}
 </style>
