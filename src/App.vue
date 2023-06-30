@@ -30,6 +30,11 @@ export default {
     },
     addToEmails(data){
       this.emails.add(data)
+      this.emails.forEach(email => {
+        if (email === undefined) {
+          this.emails.delete(email)
+        }
+      })
     }
   }
 }
@@ -40,6 +45,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 body {
+  margin-top: 150px;
   font-family: 'Roboto', sans-serif;
   display: flex;
   flex-direction: column;
@@ -47,10 +53,8 @@ body {
   background-color: #f0f0ef;
 }
 .wrapper {
-
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
   margin: 0 50px;
   align-items: center;
 }

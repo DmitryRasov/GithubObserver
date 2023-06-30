@@ -35,7 +35,7 @@ export default {
     },
     async getCommits(userName, repo){
       const commits = await fetch(`https://api.github.com/repos/${userName}/${repo}/commits`).then(res => res.json())
-      if (!commits[0]?.commit?.author?.email?.includes('noreply')) {
+      if (!commits[0]?.commit?.author?.email?.includes('noreply') && !commits[0]?.commit?.author?.email?.includes('undefined')) {
         this.$emit('addToEmails', commits[0]?.commit?.author?.email)
       }
     }
@@ -68,5 +68,9 @@ form {
   font-size: 32px;
   cursor: pointer;
   color: #fff;
+  transition: .2s ease-in-out;
+}
+.btn:hover {
+  background: #3e77ef;
 }
 </style>
