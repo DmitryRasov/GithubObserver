@@ -1,10 +1,11 @@
 <template>
   <form @click.prevent>
     <input
+        class="email-input"
         type="text"
         v-model="query"
     >
-    <button @click="getRepos(query)">Find</button>
+    <button class="btn" @click="getRepos(query)">Find</button>
   </form>
 </template>
 
@@ -43,21 +44,29 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 form {
-  margin-bottom: 20p10;
+  margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif;
 }
-input {
-  border: 2px solid red;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+.email-input {
+  border-top-left-radius: 35px;
+  border-bottom-left-radius: 35px;
+  padding: 23px 48px;
+  border: none;
   outline: none;
   font-size: 32px;
 }
-button {
-  background-color: transparent;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+.btn {
+  font-family: inherit;
+  background-color: rgb(37, 37, 37);
+  border-top-right-radius: 35px;
+  border-bottom-right-radius: 35px;
+  padding: 23px 48px;
+  border: none;
   font-size: 32px;
   cursor: pointer;
+  color: #fff;
 }
 </style>
