@@ -44,7 +44,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: lightslategrey;
+  background-color: #f0f0ef;
 }
 .wrapper {
 
