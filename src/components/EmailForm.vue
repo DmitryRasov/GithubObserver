@@ -1,6 +1,7 @@
 <template>
   <form @click.prevent>
     <input
+        placeholder="Enter user's github name"
         class="email-input"
         type="text"
         v-model="query"
@@ -25,7 +26,10 @@ export default {
     async getRepos(userName){
       this.query = ''
       this.$emit('clear')
-      const result = await fetch(`https://api.github.com/users/${userName}/repos`).then(res => res.json())
+      console.log('loading')
+      const result = await fetch(`https://api.github.com/users/${userName}/repos`)
+          .then(res => res.json())
+      this.$emit('loading')
       for (let i = 0; i < result.length; i++) {
         if (result[i]?.fork === false) {
           this.repository = result[i]?.name
@@ -44,7 +48,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 form {
   margin-bottom: 20px;

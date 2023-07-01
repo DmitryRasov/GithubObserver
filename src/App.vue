@@ -3,9 +3,11 @@
     <email-form
         @clear="clear"
         @addToEmails="addToEmails"
+        @loadind="load"
     />
     <email-result
         :emails="emails"
+        :loading="loading"
     />
   </div>
 </template>
@@ -22,11 +24,16 @@ export default {
   data() {
     return {
       emails: new Set(),
+      loading: false
     }
   },
   methods: {
+    load() {
+      this.loading = false
+    },
     clear() {
       this.emails.clear()
+      this.loading = true
     },
     addToEmails(data){
       this.emails.add(data)
