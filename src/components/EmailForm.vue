@@ -26,14 +26,13 @@ export default {
     async getRepos(userName){
       this.query = ''
       this.$emit('clear')
-      console.log('loading')
       const result = await fetch(`https://api.github.com/users/${userName}/repos`)
           .then(res => res.json())
-      this.$emit('loading')
       for (let i = 0; i < result.length; i++) {
         if (result[i]?.fork === false) {
           this.repository = result[i]?.name
           await this.getCommits(userName, this.repository)
+          .then(this.$emit('loading'))
         }
       }
     },

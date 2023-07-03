@@ -3,7 +3,7 @@
     <email-form
         @clear="clear"
         @addToEmails="addToEmails"
-        @loadind="load"
+        @loading="load"
     />
     <email-result
         :emails="emails"
@@ -30,10 +30,12 @@ export default {
   methods: {
     load() {
       this.loading = false
+      console.log('false')
     },
     clear() {
       this.emails.clear()
       this.loading = true
+      console.log('true')
     },
     addToEmails(data){
       this.emails.add(data)
