@@ -3,7 +3,8 @@
     <email-form
         @clear="clear"
         @addToEmails="addToEmails"
-        @loading="load"
+        @startLoading="startLoad"
+        @stopLoading="stopLoad"
     />
     <email-result
         :emails="emails"
@@ -28,14 +29,16 @@ export default {
     }
   },
   methods: {
-    load() {
+    stopLoad() {
       this.loading = false
       console.log('false')
     },
-    clear() {
-      this.emails.clear()
+    startLoad() {
       this.loading = true
       console.log('true')
+    },
+    clear() {
+      this.emails.clear()
     },
     addToEmails(data){
       this.emails.add(data)

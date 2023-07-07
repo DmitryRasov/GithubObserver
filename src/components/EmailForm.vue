@@ -1,7 +1,7 @@
 <template>
   <form @click.prevent>
     <input
-        placeholder="Enter user's github name"
+        placeholder="username"
         class="email-input"
         type="text"
         v-model="query"
@@ -37,9 +37,15 @@ export default {
       }
     },
     async getCommits(userName, repo){
-      const commits = await fetch(`https://api.github.com/repos/${userName}/${repo}/commits`).then(res => res.json())
+      this.$emit('startLoading')
+      const commits = await fetch(`https://api.github.com/repos/${userName}/${repo}/commits`)
+      .then(res => res.json())
+      // .then(this.$emit('stopLoading'))
       if (!commits[0]?.commit?.author?.email?.includes('noreply') && !commits[0]?.commit?.author?.email?.includes('undefined')) {
         this.$emit('addToEmails', commits[0]?.commit?.author?.email)
+        this.$emit('stopLoading')
+      } else {
+        this.$emit('stopLoading')
       }
     }
   }

@@ -12,7 +12,8 @@
         @click="copyText(email)"
       >
     </div>
-    <div v-if="loading === true" class="loader"><div></div><div></div><div></div></div>
+    <!-- <div v-if="loading === true" class="loader"><div></div><div></div><div></div></div> -->
+    <div v-if="loading === true" class="loader"><div></div><div></div><div></div><div></div></div>
   </div>
 </template>
 
@@ -48,33 +49,52 @@ export default {
   height: 80px;
 }
 .loader div {
-  display: inline-block;
   position: absolute;
-  left: 8px;
-  width: 16px;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
   background: #8fc9fb;
-  animation: loader 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .loader div:nth-child(1) {
   left: 8px;
-  animation-delay: -0.24s;
+  animation: loader1 0.6s infinite;
 }
 .loader div:nth-child(2) {
-  left: 32px;
-  animation-delay: -0.12s;
+  left: 8px;
+  animation: loader2 0.6s infinite;
 }
 .loader div:nth-child(3) {
-  left: 56px;
-  animation-delay:  0s;
+  left: 32px;
+  animation: loader2 0.6s infinite;
 }
-@keyframes loader {
+.loader div:nth-child(4) {
+  left: 56px;
+  animation: loader3 0.6s infinite;
+}
+@keyframes loader1 {
   0% {
-    top: 8px;
-    height: 64px;
+    transform: scale(0);
   }
-  50%, 100% {
-    top: 24px;
-    height: 32px;
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes loader3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes loader2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
   }
 }
 
