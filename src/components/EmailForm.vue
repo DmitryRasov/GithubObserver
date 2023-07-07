@@ -32,15 +32,14 @@ export default {
         if (result[i]?.fork === false) {
           this.repository = result[i]?.name
           await this.getCommits(userName, this.repository)
-          .then(this.$emit('loading'))
+            .then(this.$emit('loading'))
         }
       }
     },
     async getCommits(userName, repo){
       this.$emit('startLoading')
       const commits = await fetch(`https://api.github.com/repos/${userName}/${repo}/commits`)
-      .then(res => res.json())
-      // .then(this.$emit('stopLoading'))
+        .then(res => res.json())
       if (!commits[0]?.commit?.author?.email?.includes('noreply') && !commits[0]?.commit?.author?.email?.includes('undefined')) {
         this.$emit('addToEmails', commits[0]?.commit?.author?.email)
         this.$emit('stopLoading')

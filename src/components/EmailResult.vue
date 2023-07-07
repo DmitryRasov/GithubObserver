@@ -12,7 +12,6 @@
         @click="copyText(email)"
       >
     </div>
-    <!-- <div v-if="loading === true" class="loader"><div></div><div></div><div></div></div> -->
     <div v-if="loading === true" class="loader"><div></div><div></div><div></div><div></div></div>
   </div>
 </template>
