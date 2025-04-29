@@ -10,6 +10,7 @@
         src="../../public/copy.svg" 
         alt="copy icon"
         @click="copyText(email)"
+        class="copy-icon"
       >
     </div>
     <div v-if="loading === true" class="loader"><div></div><div></div><div></div><div></div></div>
@@ -17,6 +18,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'EmailResult',
   props: {
@@ -53,7 +55,7 @@ export default {
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: #8fc9fb;
+  background: #ffe500;
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .loader div:nth-child(1) {
@@ -97,12 +99,14 @@ export default {
   }
 }
 
-img { 
+.copy-icon {
+  filter: invert(92%) sepia(45%) saturate(2672%) hue-rotate(355deg) brightness(105%) contrast(102%);
   cursor: pointer;
   width: 15px;
   height: 15px;
   margin-left: 15px;
 }
+
 .email-wrap {
   width: 100%;
   display: flex;
@@ -111,10 +115,11 @@ img {
   gap: 10px;
 }
 .email-item {
+  color: #ffe500;
   display: flex;
   align-items: center;
   border-radius: 50px;
-  background: #8fc9fb;  
+  background: #2e2e2e;  
   padding: 10px 20px;
 }
 </style>
