@@ -20,31 +20,45 @@
         :current-query="lastSearchedQuery"
       />
     </div>
+    <search-history
+      :history="searchHistory"
+      @select-history="loadHistoryItem"
+      @delete-history="deleteHistoryItem"
+    />
   </div>
 </template>
 
 <script>
 import EmailResult from "@/components/EmailResult.vue";
 import EmailForm from "@/components/EmailForm.vue";
+import SearchHistory from "@/components/SearchHistory.vue";
+
+const STORAGE_KEY = 'github-email-finder-history';
+const MAX_HISTORY_ITEMS = 10;
 
 export default {
   name: 'App',
   components: {
     EmailResult,
-    EmailForm
+    EmailForm,
+    SearchHistory
   },
   data() {
     return {
       emails: new Set(),
       loading: false,
       currentQuery: '',
-      lastSearchedQuery: ''
+      lastSearchedQuery: '',
+      searchHistory: []
     }
   },
   computed: {
     emailList() {
       return Array.from(this.emails).filter(Boolean)
     }
+  },
+  created() {
+    this.loadHistory()
   },
   methods: {
     startLoading() {
@@ -53,6 +67,9 @@ export default {
     },
     stopLoading() {
       this.loading = false
+      if (this.emailList.length > 0) {
+        this.saveToHistory()
+      }
     },
     clearEmails() {
       this.emails.clear()
@@ -64,6 +81,36 @@ export default {
       if (email) {
         this.emails.add(email)
       }
+    },
+    saveToHistory() {
+      const historyItem = {
+        query: this.lastSearchedQuery,
+        emails: this.emailList,
+        timestamp: Date.now()
+      }
+
+      this.searchHistory.unshift(historyItem)
+      
+      if (this.searchHistory.length > MAX_HISTORY_ITEMS) {
+        this.searchHistory.pop()
+      }
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.searchHistory))
+    },
+    loadHistory() {
+      const savedHistory = localStorage.getItem(STORAGE_KEY)
+      if (savedHistory) {
+        this.searchHistory = JSON.parse(savedHistory)
+      }
+    },
+    loadHistoryItem(item) {
+      this.emails.clear()
+      item.emails.forEach(email => this.emails.add(email))
+      this.lastSearchedQuery = item.query
+    },
+    deleteHistoryItem(index) {
+      this.searchHistory.splice(index, 1)
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.searchHistory))
     }
   }
 }
@@ -87,6 +134,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  position: relative;
 }
 
 .wrapper {
